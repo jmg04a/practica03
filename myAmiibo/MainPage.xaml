@@ -17,7 +17,7 @@
         </HorizontalStackLayout>
 
         <SearchBar Grid.Row="1"
-                   Placeholder="Buscar personaje..."
+                   Placeholder="Search a character..."
                    Text="{Binding SearchText}"
                    IsEnabled="{Binding IsNotBusy}"/>
 
