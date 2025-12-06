@@ -1,0 +1,41 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:viewmodel="clr-namespace:myAmiibo.ViewModels"
+             xmlns:model="clr-namespace:myAmiibo.Models"
+             x:Class="myAmiibo.MainPage"
+             x:DataType="viewmodel:AmiibosViewModel"
+             Title="Amiibo Searcher">
+
+    <Grid RowDefinitions="Auto, Auto, *" Padding="10" RowSpacing="10">
+        <HorizontalStackLayout Grid.Row="0" Spacing="10">
+            <Button Text="Load Amiibos"
+                    Command="{Binding GetAmiibosCommand}"
+                    IsEnabled="{Binding IsNotBusy}"/>
+
+            <ActivityIndicator IsRunning="{Binding IsBusy}" IsVisible="{Binding IsBusy}" Color="Blue"/>
+        </HorizontalStackLayout>
+
+        <SearchBar Grid.Row="1"
+                   Placeholder="Buscar personaje..."
+                   Text="{Binding SearchText}"
+                   IsEnabled="{Binding IsNotBusy}"/>
+
+        <CollectionView Grid.Row="2"
+                        ItemsSource="{Binding Amiibos}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate x:DataType="model:Amiibo">
+                    <HorizontalStackLayout Padding="10" Spacing="10">
+                        <Image Source="{Binding Image}" HeightRequest="100" WidthRequest="100" Aspect="AspectFit"/>
+                        <VerticalStackLayout VerticalOptions="Center">
+                            <Label Text="{Binding Name}" FontSize="20" FontAttributes="Bold"/>
+                            <Label Text="{Binding GameSeries}" FontSize="14" TextColor="Gray"/>
+                        </VerticalStackLayout>
+                    </HorizontalStackLayout>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+        </CollectionView>
+
+    </Grid>
+
+</ContentPage>
